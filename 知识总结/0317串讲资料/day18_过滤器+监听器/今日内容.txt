@@ -1,0 +1,54 @@
+一.Filter
+1.Filter概述
+	Servlet/Filter/Listener统称为JavaWeb的三大组件
+	其中Filter也叫做过滤器
+	过滤器可以实现在用户访问某个资源之前或之后, 将访问的请求和响应拦截下来, 从而做一些相关的处理.
+	Servlet是用来处理请求的
+	Filter是用来拦截请求, 做一些相关的处理
+
+	其实所谓的拦截就是将代表请求的request对象和代表响应的response对象拦截下来.
+	一个资源可以配置多个过滤器进行拦截, 一个过滤器也可以配置拦截多个资源.
+
+2.如何开发过滤器
+	(1)写一个类,实现Filter接口
+	(2)在WEB应用的web.xml文件中配置过滤器所拦截的资源(路径)
+
+3.如何配置过滤器
+	<filter>
+		<filter-name>FilterDemo1</filter-name>
+		<filter-class>com.tedu.filter.FilterDemo1</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>FilterDemo1</filter-name>
+		<url-pattern>/*</url-pattern>
+		<url-pattern>/ServletDemo1</url-pattern>
+		<url-pattern>/ServletDemo2</url-pattern>
+		<url-pattern>/servlet/*</url-pattern>
+		<servlet-name>ServletDemo1</servlet-name>
+		<servlet-name>ServletDemo2</servlet-name>
+		<servlet-name>ServletDemo2</servlet-name>
+	</filter-mapping>
+
+4.过滤器中的方法
+	(1)init方法 -- Filter实例创建完成后立即调用进行初始化的操作
+	(2)doFilter方法 -- 当有请求被改Filter拦截后, 将会调用doFilter方法进行处理
+	(3)destroy方法 -- 在Filter实例销毁之前, 将会调用destroy方法进行善后的处理
+
+	doFilter方法中的参数--FilterChain对象 表示多个过滤器组成的过滤器链对象. 可以调用doFilter方法来放行过滤器
+
+二.Listener
+1.什么是监听器?
+	Listener也叫做监听器, 是JavaWeb的三大组件之一.
+	监听器一般是实现特定接口的类, 监听器可以监听某一个Java对象的状态(对象的创建/对象的销毁/对象的属性变化等), 当Java对象发生上面的事件时, 将会通知监听器, 监听器将会调用特定的方法来处理该事件.
+
+
+2.如何开发监听器
+	(1)写一个类, 实现监听器接口
+	(2)在web.xml文件中注册监听器
+
+3.JavaWeb中的监听器(一共有八个)
+	ServletContextListener -- ServletContext对象的生命周期监听器
+	HttpSessionListener -- HttpSession对象的生命周期监听器
+	ServletRequestListener -- ServletRequest对象的生命周期监听器
+	
+	

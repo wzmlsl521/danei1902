@@ -1,0 +1,15 @@
+/*从数据库挂载到主数据中 配置顺序 主机IP/主机端口/访问主机用户名和密码/
+ 主机二进制日志文件名称/配置文件位置
+*/
+CHANGE MASTER TO MASTER_HOST='192.168.126.130',MASTER_PORT=3306,
+MASTER_USER='root',MASTER_PASSWORD='root',
+MASTER_LOG_FILE='mysql-bin.000003',MASTER_LOG_POS=120
+
+/*启动从服务*/
+START SLAVE
+
+/*查看从节点状态*/
+SHOW SLAVE STATUS;
+
+/*查看UUID*/
+SELECT UUID();

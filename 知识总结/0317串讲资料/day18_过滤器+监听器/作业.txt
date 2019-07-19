@@ -1,0 +1,13 @@
+1、创建一个jt_db（如果存在就先删除再创建），并指定编码为GBK。
+
+2、在jt_db库中添加一个product表，要求具有id(int、主键、自增)、name(商品名称)、category(商品分类)、price(商品单价)、pnum(商品库存数量)、description(商品描述)字段
+
+3、往product表中添加5条记录,例如：
+	insert into product values(null, '小米手机', '手机数码', 2999.0, 100, '小米为发烧而生。。。');
+	...
+
+4、创建一个ProdCRUD类，在该类中实现：
+(1) 添加一个findAll方法，通过JDBC程序实现查询product表中所有的记录，并打印在控制台。
+(2) 添加一个addProd方法，通过JDBC程序实现往product表中添加一条商品信息
+(3) 添加一个updateProd方法，通过JDBC程序实现修改product表中的某一个商品的信息
+(4) 添加一个deleteProd方法，通过JDBC程序实现删除product表中的某一个商品的信息

@@ -1,0 +1,9 @@
+/*查看主数据库的 二进制日志文件 以及位置*/
+SHOW MASTER STATUS;
+
+/*主从配置期间  不允许进行数据操作 所以需要锁表*/
+FLUSH TABLE WITH READ LOCK;
+
+/*以上操作没有任何问题 开始配置从库  如果从库挂载完成 则将锁表取消*/
+
+UNLOCK TABLES;

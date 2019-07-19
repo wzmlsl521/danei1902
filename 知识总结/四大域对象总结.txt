@@ -1,0 +1,42 @@
+PageContext
+Request
+Session
+ServletContext
+
+作用域的大小: PageContext < Request < Session < ServletContext
+
+(1)ServletContext
+生命周期:
+	创建: 服务器启动加载WEB应用之后立即创建ServletContext对象
+	销毁: 服务器关闭或者WEB应用被移出容器时销毁
+作用范围:
+	整个WEB应用
+主要功能:
+	在整个WEB应用范围内实现资源的共享
+	
+(2)Session
+生命周期: 
+	创建: 第一次调用request.getSession()创建
+	销毁:
+		超时销毁
+		自杀
+		意外身亡
+作用范围:
+	一次会话
+主要功能:
+	在整个会话范围内实现资源的共享
+	
+(3)request
+生命周期:
+	创建: 一次请求开始时创建request
+	销毁: 一次请求结束时销毁request
+作用范围: 整个请求链
+主要功能: 在整个请求链中实现数据的共享
+
+(4)pageContext
+生命周期: 访问JSP开始创建, 访问JSP结束时销毁
+作用范围: 整个JSP
+主要功能: 在整个JSP范围内实现资源的共享
+
+
+

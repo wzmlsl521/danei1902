@@ -1,0 +1,67 @@
+mysql配置
+	1.设置数据库用户名和密码
+		mysqladmin -u root password "root"
+	2.打开3306端口号
+		iptables -I INPUT -p tcp --dport 3306 -j ACCEPT
+	3.开放端口立即
+		/etc/rc.d/init.d/iptables save       可以不执行
+	4.查看当前端口开放情况
+		/etc/rc.d/init.d/iptables status;    
+	5.赋予用户访问权限
+		grant all on *.* to 'root'@'%' identified by 'root';
+
+主库修改文件
+	/etc/my.cnf
+	配置 
+		server-id=1
+	    log-bin=mysql-bin
+
+
+1.主表查看状态
+	 SHOW MASTER STATUS;  
+
+2.主表锁定操作
+	FLUSH TABLE WITH READ LOCK; 
+
+3.主表解除锁定操作
+	UNLOCK TABLES; 
+
+从库修改配置
+	1.修改从库auto.id    //因为复制过来后ID相同
+	/var/lib/mysql/auto.cnf
+
+	2.修改从库的my.cnf文件
+	server-id=2    //添加id配置
+  
+	3.查看日志文件是否生成
+		如果启动不了 需要杀进程
+		ps -ef |grep mysql   查询mysql的服务项
+		Kill -9 1956 2133    //表示强制删除 1956 2133表示端口号
+
+	
+4.从表挂载主表
+	/*配置注解 主机名/端口号/用户名/密码/二进制文件名称/同步的位置 */
+	CHANGE MASTER TO MASTER_HOST='192.168.247.133',MASTER_PORT=3306,
+	MASTER_USER='root',MASTER_PASSWORD='root',
+	MASTER_LOG_FILE='mysql-bin.000001',MASTER_LOG_POS=120
+
+	/*启动从服务*/
+	START SLAVE
+
+		/*如果需要停止服务*/
+		STOP SLAVE   
+
+	/*查看状态*/
+	SHOW SLAVE STATUS;
+
+
+5.Amoeba-launcher配置文件
+#配置jdk内存空间
+DEFAULT_OPTS="-server -Xms256m -Xmx256m -Xss256k"
+
+
+6.开放8066端口
+	iptables -I INPUT -p tcp --dport 8066 -j ACCEPT
+	/etc/rc.d/init.d/iptables save    //让端口生效
+	/etc/rc.d/init.d/iptables status  //查看端口是否打开
+	

@@ -1,0 +1,32 @@
+1、ServletContext域对象 -- 代表整个WEB应用的对象
+生命周期：
+	在WEB应用被加载之后立即创建ServletContext对象
+	服务器关闭或者WEB应用被移出容器时将会销毁ServletContext对象。
+作用范围：整个WEB应用
+主要功能：在整个WEB应用范围内实现资源的共享
+
+2、Session域对象	-- 表示整个会话的对象
+生命周期：
+	当第一次调用request.getSession方法时将会创建Session对象
+	(1)超时销毁：超过30分钟没有操作session，将会超时销毁
+	(2)自杀: 当调用session.invalidate方法时, 会立即销毁session.
+	(3)意外身亡: 服务器非正常关闭, session会销毁( 如果是正常关闭,session会序列化保存到服务器的work目录下. )
+作用范围：整个会话范围内
+主要功能：在整个会话范围内实现资源的共享
+
+3、request域对象 -- 表示Http请求的对象
+生命周期：一次请求开始时创建request对象, 一次请求结束时销毁request对象.
+作用范围：整个请求链
+主要功能：在整个请求链中共享数据
+
+4、pageContext域对象 -- 表示当前JSP运行环境的对象
+生命周期：访问JSP开始时创建pageContext对象, 访问JSP结束时销毁pageContext对象.
+作用范围：当前JSP页面
+主要功能：在当前JSP页面中共享数据.
+
+相同点：
+	setAttribute(String name, Object value); -- 添加一个域属性、修改域属性
+	getAttribute(String name); -- 获取域属性
+	removeAttribute(String name); -- 删除域属性
+	
+	

@@ -1,0 +1,17 @@
+-- 0.删除 jt_db
+drop database if exists jt_db;
+-- 1.创建数据库 jt_db
+create database jt_db charset utf8;
+-- 2.选中 jt_db 数据库
+use jt_db;
+-- 3.在 jt_db 库中创建 product 表(商品表)
+create table product(
+	id int primary key auto_increment,	-- 商品ID
+	name varchar(50),					-- 商品名称
+	category varchar(50),				-- 商品分类
+	price double,						-- 商品单价
+	pnum int,							-- 库存数量
+	description varchar(50)				-- 商品描述
+);
+
+insert into product values(null,'小米手机','手机数码',2999,1000,'为发烧而生!');
